@@ -27,7 +27,7 @@ app.listen(process.env.PORT || PORT, () => {
 })
 
 app.get('/', (request, response) => {
-    response.status(200).json({ message: 'PRIN144-Final-Exam: Ralph Lee' });
+    response.send("PRIN144-Final-Exam: Ralph Lee");
 });
 
 // http://localhost:4000/students
