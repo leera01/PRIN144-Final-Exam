@@ -1,0 +1,164 @@
+openapi: 3.0.3
+info:
+  title: PRIN144-Final-Exam
+  version: '1.0'
+  description: API Documentation for Final Exam
+  contact:
+    email: johndoe@email.com
+    name: John Doe
+externalDocs:
+  url: openapi.json
+  description: API Collection for PostMan Import.
+servers:
+  - url: https://prin-144-final-exam-beta.vercel.app
+    variables: {}
+    description: Production
+paths:
+  /students:
+    summary: Students base path.
+    description: Students base path.
+    get:
+      summary: Returns all students.
+      description: Returns all students.
+      operationId: GetAllStudents
+      responses:
+        200:
+          description: Student found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StudentGetResponse'
+      tags:
+        - Students
+    post:
+      summary: Create a student.
+      description: Create a student.
+      operationId: CreateStudent
+      requestBody:
+        description: To create student, add values to request body.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentCreateRequest'
+      responses:
+        201:
+          description: Student created.
+      tags:
+        - Students
+  /students/{id}:
+    summary: Students base path with id.
+    description: Students base path with id.
+    get:
+      summary: Returns a student by id.
+      description: Returns a student by id.
+      operationId: GetStudent
+      responses:
+        200:
+          description: Student found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentGetResponse'
+        404:
+          description: Student not found.
+      tags:
+        - Students
+    put:
+      summary: Updates a student by id.
+      description: Updates a student by id.
+      operationId: UpdateStudent
+      requestBody:
+        description: To update a student, add values to request body.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentUpdateRequest'
+      responses:
+        200:
+          description: Student updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentUpdateResponse'
+        404:
+          description: Student not found.
+      tags:
+        - Students
+    delete:
+      summary: Deletes a student by id.
+      description: Deletes a student by id.
+      operationId: DeleteStudent
+      responses:
+        200:
+          description: Student deleted.
+        404:
+          description: Student not found.
+      tags:
+        - Students
+    parameters:
+      - name: id
+        in: path
+        description: StudentID
+        required: true
+        schema:
+          type: integer
+components:
+  schemas:
+    StudentCreateRequest:
+      type: object
+      properties:
+        given_name:
+          type: string
+        family_name:
+          type: string
+        year_level:
+          type: integer
+        course:
+          type: string
+        section:
+          type: string
+    StudentUpdateRequest:
+      type: object
+      properties:
+        given_name:
+          type: string
+        family_name:
+          type: string
+        year_level:
+          type: integer
+        course:
+          type: string
+        section:
+          type: string
+    StudentGetResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        given_name:
+          type: string
+        family_name:
+          type: string
+        year_level:
+          type: integer
+        course:
+          type: string
+        section:
+          type: string
+    StudentUpdateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        given_name:
+          type: string
+        family_name:
+          type: string
+        year_level:
+          type: integer
+        course:
+          type: string
+        section:
+          type: string

@@ -2,6 +2,22 @@ const { sql } = require('@vercel/postgres');
 const express = require('express')
 const app = express();
 
+// Import File System Module and load openapi.yaml file.
+const fs = require('fs');
+const yamlFile = fs.readFileSync(process.cwd() + '/openapi.yaml', 'utf8');
+
+// Import Yaml Module and parse the loaded yaml file.
+const YAML = require('yaml');
+const swaggerDocument = YAML.parse(yamlFile);
+
+// Import Swagger UI Express module and load the parsed YAML file.
+const swaggerUi = require('swagger-ui-express');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+	customCss:
+		'.swagger-ui .opblock .opblock-summary-path-description-wrapper { align-items: center; display: flex; flex-wrap: wrap; gap: 0 10px; padding: 0 10px; width: 100%; }',
+	customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css',
+}));
+
 // enable middleware to parse body of Content-type: application/json
 app.use(express.json());
 
