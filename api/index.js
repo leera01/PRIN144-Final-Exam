@@ -5,6 +5,7 @@ const app = express();
 // enable middleware to parse body of Content-type: application/json
 app.use(express.json());
 
+const PORT = 4000;
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Server is listening on port ${PORT}`)
 })
