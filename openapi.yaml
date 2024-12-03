@@ -91,7 +91,7 @@ paths:
       description: Deletes a student by id.
       operationId: DeleteStudent
       responses:
-        200:
+        204:
           description: Student deleted.
         404:
           description: Student not found.
